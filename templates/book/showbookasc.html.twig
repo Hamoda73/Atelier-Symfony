@@ -1,0 +1,61 @@
+<html>
+    <body>
+        <h1>List of published books</h1>
+        <table border="4">
+            <tr>
+                <td>ID</td>
+                <td>title</td>
+                <td>publication</td>
+                <td>published</td>
+                
+                <td>author </td>
+                <td>Action</td>
+                <td>Delete</td>
+                
+            </tr>
+            {% set total = 0 %} 
+            {% set total1 = 0 %} 
+            {% for a in book %}
+                <tr>
+                    <td>{{a.ref}}</td>
+                    <td>{{a.title}}</td>
+                    <td>{{a.publicationDate|date('Y-m-d')}}</td>
+                    <td>{{a.published ? 'true' : 'false'}}</td>
+                    
+                    <td>{{a.author.username}}</td>
+                    <td><a href="{{ path('app_editbookform', {'id': a.ref}) }}">Edit</a></td>
+                    <td><a href="{{ path('app_deletebook', {'id': a.ref}) }}">Delete</a></td>
+                   
+                    
+                </tr>
+                {% if a.published %}
+                    {% set total = total + 1 %} 
+                {% endif %}
+
+                {% if not a.published %}
+                    {% set total1 = total1 + 1 %} 
+                {% endif %}
+
+            {% endfor %}
+        </table>
+
+        {% if total > 0 %}
+            Number of published books: {{ total }} <br>
+        {% else %}
+            No published books found.
+        {% endif %}
+
+        {% if total1 > 0 %}
+            Number of unpublished books: {{ total1 }}
+        {% else %}
+            No unpublished books found.
+        {% endif %}
+
+        <br>
+        <a href="{{ path('app_addbookform') }}"><button>Create New Book</button></a>
+        
+
+
+
+    </body>
+</html>

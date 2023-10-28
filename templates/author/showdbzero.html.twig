@@ -1,0 +1,27 @@
+
+
+<table border="3">
+    <tr>
+        <td>Ref</td>
+        <td>username</td>
+        <td>email</td>
+        <td>nb_books</td>
+        <td>Action</td>
+        <td>Delete</td>
+
+    </tr>
+    {%for a in author%}
+    <tr>
+        <td>{{a.id}}</td>
+        <td>{{a.username}}</td>
+        <td>{{a.email}}</td>
+        <td>{{a.getNbbooks}}</td>
+        <td><a href="{{path('app_editauthor',{'id':a.id})}}">edit</a></td>
+        <td><a href="{{path('app_deleteauthor',{'id':a.id})}}">delete</a></td>
+
+    </tr>
+    {%endfor%}
+</table>
+<a href="{{ path('app_showdbasc') }}"><button>Sort by Email</button></a>
+<a href="{{ path('app_showdbzero') }}"><button>Delete authors with zero books</button></a>
+<a href="{{ path('app_addformauthor') }}"><button>Add author</button></a>
